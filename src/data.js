@@ -3,22 +3,27 @@ let data = [
     id : 0,
     title : "White and Black",
     content : "Born in France",
-    price : 120000
+    price : 120000,
+    url : "https://codingapple1.github.io/shop/shoes1.jpg"
   },
 
   {
     id : 1,
     title : "Red Knit",
     content : "Born in Seoul",
-    price : 110000
+    price : 110000,
+    url : "https://codingapple1.github.io/shop/shoes2.jpg"
   },
 
   {
     id : 2,
     title : "Grey Yordan",
     content : "Born in the States",
-    price : 130000
+    price : 130000,
+    url : "https://codingapple1.github.io/shop/shoes3.jpg"
   }
 ] 
 
+// export 하려면 export default 변수명
+// 변수가 여러개일 경우 중괄호 묶어준다.
 export default data;
