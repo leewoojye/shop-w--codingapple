@@ -1,9 +1,18 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-import bg from './bg.jpg' // 이미지 경로
+import { Button, Navbar, Container, Nav, NavDropdown, Row, Col } from 'react-bootstrap';
+import bg from './bg.jpg'
+import { useState } from 'react';
+// public 폴더 안에 이미지 사용할 땐 그냥 "/이미지경로"
+// public 폴더는 일일이 import 할 필요 없어 이미지 같은 리소스들 넣기 좋다.
+import data from './data.js' // 다른 파일에서 변수 가져와서 쓰기 -> import/export
 
 function App() {
+
+  // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤
+  // import, export를 통해 데이터를 가져온다.
+  let [shoes]=useState(data);
+
   return (
     <div>
 <Navbar expand="lg" className="bg-body-tertiary">
@@ -36,6 +45,17 @@ function App() {
     */}
     <div className='main-bg' style={{ backgroundImage :'url('+ bg +')'}}></div>
     <div className='brandnew'>brand new</div>
+    <Container className='container'>
+      <Row className='row'>
+        <Col className='col1'>
+        <img src='https://codingapple1.github.io/shop/shoes1.jpg' width='80%'></img>
+        </Col>
+        <Col className='col2'><img src='https://codingapple1.github.io/shop/shoes2.jpg' width='80%'></img>
+        </Col>
+        <Col className='col3'><img src='https://codingapple1.github.io/shop/shoes3.jpg' width='80%'></img>
+        </Col>
+      </Row>
+    </Container>
     </div>
   );
 }
