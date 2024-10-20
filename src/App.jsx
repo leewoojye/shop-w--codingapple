@@ -16,6 +16,7 @@ import { useState } from "react";
 import data from "./data.js"; // 다른 파일에서 변수 가져와서 쓰기 -> import/export
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.jsx";
+import axios from "axios";
 
 function App() {
   // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤
@@ -82,16 +83,31 @@ function App() {
         style={{ backgroundImage: "url(" + bg + ")" }}
       ></div>
       <div className="brandnew">brand new</div>
-      <button className="sort" onClick={()=>{
-        let copy=[...shoes];
-        copy.sort((a,b)=>{
-          // 비교 함수는 정렬 순서를 결정하기 위해 반드시 값을 반환해야 함.
-          return a.title.localeCompare(b.title);
-        });
-        console.log("changed");
-        shoesChange(copy);
-      }
-      }>사전순 정렬</button>
+      <button
+        className="sort"
+        onClick={() => {
+          let copy = [...shoes];
+          copy.sort((a, b) => {
+            // 비교 함수는 정렬 순서를 결정하기 위해 반드시 값을 반환해야 함.
+            return a.title.localeCompare(b.title);
+          });
+          console.log("changed");
+          shoesChange(copy);
+        }}
+      >
+        사전순 정렬
+      </button>
+      <button
+        onClick={() => {
+          axios
+            .get("https://codingapple1.github.io/shop/data2.json")
+            .then((data) => {
+              console.log(data);
+            });
+        }}
+      >
+        버튼
+      </button>
 
       {/*
     <Container className='container'>
@@ -125,10 +141,11 @@ function App() {
         ></Route>
         {/* <Route path="/detail" element={<Detail shoes={shoes}/>} /> */}
         {/* 페이지 여러개 만들고 싶으면 :URL 파라미터 써도 됨
-        */}
+         */}
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
-        <Route className="container"
+        <Route
+          className="container"
           path="/about"
           element={
             <>
@@ -140,13 +157,17 @@ function App() {
           <Route path="member" element={<div>멤버들</div>} />
           <Route path="location" element={<div>회사위치</div>} />
         </Route>
-        <Route path="/event" element={
-          <>
-          <div>오늘의 이벤트</div>
-          <Outlet></Outlet>
-          </>
-        }>
-          <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />         <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
+        <Route
+          path="/event"
+          element={
+            <>
+              <div>오늘의 이벤트</div>
+              <Outlet></Outlet>
+            </>
+          }
+        >
+          <Route path="one" element={<div>첫 주문시 양배추즙 서비스</div>} />{" "}
+          <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
         </Route>
         <Route path="*" element={<div>없는 페이지입니다</div>} />
       </Routes>
