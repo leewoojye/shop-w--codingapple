@@ -22,6 +22,8 @@ function App() {
   // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤
   // import, export를 통해 데이터를 가져온다.
   let [shoes, shoesChange] = useState(data);
+  let [추가물품, 추가물품변경] = useState(false);
+  let [추가버튼, 추가버튼변경] = useState("");
   // use+함수명() : 리액트 훅
   // 페이지 이동을 도와주는 리액트 훅
   let navigate = useNavigate();
@@ -101,12 +103,20 @@ function App() {
         onClick={() => {
           axios
             .get("https://codingapple1.github.io/shop/data2.json")
-            .then((data) => {
-              console.log(data);
+            .then((결과) => {
+              // 로딩중 띄우기
+              console.log(결과.data);
+              추가물품변경(true);
+              추가버튼변경(결과.data);
+              // 로딩중 숨기기
+            })
+            .catch(() => {
+              console.log("failed");
+              // 로딩중 숨기기
             });
         }}
       >
-        버튼
+        더보기
       </button>
 
       {/*
@@ -135,6 +145,15 @@ function App() {
                   // return() 안넣었는데 에러를 뱉지 않았다..
                   return <Item a={a}></Item>;
                 })}
+              </Row>
+              <Row>
+                {/* 추가물품에 대한 state를 별도로 선언하는 대신 shoes state를 변경시키는 방법도 있음
+                concat()-문자열이나 배열을 합쳐주는 함수 */}
+                {추가물품 == true
+                  ? 추가버튼.map(function (a) {
+                      return <Item a={a} />;
+                    })
+                  : null}
               </Row>
             </Container>
           }
