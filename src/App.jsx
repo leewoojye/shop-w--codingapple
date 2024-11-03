@@ -58,6 +58,7 @@ function App() {
               </Nav.Link>
               <Link to="/">홈</Link>
               <Link to="/detail">상세페이지</Link>
+              <Link to="/cart">카트</Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

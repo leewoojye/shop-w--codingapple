@@ -20,6 +20,8 @@ import {
   useParams,
 } from "react-router-dom";
 import data from "../data.js";
+import { useDispatch, useSelector } from "react-redux";
+import { addAmount, addProduct } from "../store";
 // import styled from "styled-component";
 
 // styled-component 는 app.css 와 달리 다른 js파일들에게 영향을 주지 않음(리액트 파일들은 나중에 같은 확장자의 파일들끼리 합쳐짐 이 과정에서 app.css 내용이 다른 js파일에도 영향을 줄 수 있음)
@@ -67,6 +69,12 @@ function Detail(props) {
   });
   let [탭, 탭변경] = useState(0);
 
+  let state = useSelector((state) => {
+    return state;
+  });
+  // store.js에게 요청을 보내는 함수
+  let dispatch = useDispatch();
+
   return (
     <>
       <div className="container">
@@ -89,7 +97,16 @@ function Detail(props) {
             <h4 className="pt-5">{data[id].title}</h4>
             <p>{data[id].content}</p>
             <p>{data[id].price}</p>
-            <button className="btn btn-danger">주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                dispatch(addProduct(data[id]));
+                //console.log(data[id]);
+                console.log(state.cart);
+              }}
+            >
+              주문하기
+            </button>
           </div>
         </div>
 
