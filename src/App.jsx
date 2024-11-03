@@ -17,6 +17,7 @@ import data from "./data.js"; // 다른 파일에서 변수 가져와서 쓰기 
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.jsx";
 import axios from "axios";
+import Cart from "./Cart.jsx";
 
 function App() {
   // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤
@@ -189,6 +190,7 @@ function App() {
           <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
         </Route>
         <Route path="*" element={<div>없는 페이지입니다</div>} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );
