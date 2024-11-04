@@ -64,7 +64,8 @@ function Detail(props) {
     localStorage.setItem("watched", JSON.stringify([...middleData]));
 
     // browser 콘솔창에는 watched 목록이 나타나는데 Application-localStorage 목록에서는 안보이는 현상 발생...
-    // 새로고침할때 무언가가 초기화되서 생긴 문제인듯! Route 통해서 페이지 전환 가능하게 하니까 해결됨
+    // 새로고침할때 무언가가 초기화되서 생긴 문제인듯! Route 통해서 페이지 전환 가능하게 하니까 해결됨 (새로고침하면 로컬스토리지 초기화됨)
+    // 원인) App.js의 useEffect() 함수가 새로고침시 호출되기 때문
     console.log("Stored watched data:", localStorage.getItem("watched"));
   }, [data, id]);
 

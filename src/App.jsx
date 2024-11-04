@@ -20,8 +20,10 @@ import axios from "axios";
 import Cart from "./Cart.jsx";
 
 function App() {
+  // useEffect 훅은 컴포넌트가 처음 렌더링될 때 한 번 실행된다. 그리고 두 번째 인자로 빈 배열 []을 주었기 때문에, 이 useEffect는 컴포넌트가 처음 마운트될 때만 실행된다. 페이지를 새로 고치면 컴포넌트가 다시 마운트되기 때문에, 이 useEffect가 다시 실행되고 localStorage의 "watched" 항목이 빈 배열로 초기화된다.
   useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify([]));
+    let watched = localStorage.getItem("watched");
+    if (!watched) localStorage.setItem("watched", JSON.stringify([]));
   }, []);
 
   // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤

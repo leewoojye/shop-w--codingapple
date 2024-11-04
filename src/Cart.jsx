@@ -1,9 +1,22 @@
-import React from "react";
+import { memo, useMemo } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, increase, addAmount } from "./store";
+import { increase, addAmount } from "./store";
+
+// 성능개선-memo & useMemo()
+// memo는 child에 전달되는 props가 변할 때만 자식 컴포넌트를 재렌더링해줌.
+let Child = memo(function () {
+  return <div>child</div>;
+});
+function 함수() {}
 
 function Cart() {
+  // useEffect()-다른요소들 렌더링끝나고실행
+  // useMemo()-요소들 렌더링될때 같이실행
+  let result = useMemo(() => {
+    return 함수();
+  }, [state]);
+
   let state = useSelector((state) => {
     return state;
   });
@@ -13,6 +26,7 @@ function Cart() {
   return (
     <div>
       {state.user.name} {state.user.age}의 장바구니
+      <Child count={count}></Child>
       <button
         onClick={() => {
           // state 변경함수 인자로 payload 전달 가능
