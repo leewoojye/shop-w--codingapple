@@ -52,6 +52,22 @@ function Detail(props) {
   // let 찾은상품 = props.shoes.find(x=>x.id==id);
   // URL 파라미터는 주로 React Router와 함께 사용되어 URL의 일부로 정보를 전달하는 방법이다. 이를 통해 특정 페이지나 컴포넌트에 필요한 데이터를 URL을 통해 전달할 수 있다.
 
+  useEffect(() => {
+    // let parseddata = localStorage.getItem("watched");
+    // parseddata = new Set(parseddata ? JSON.parse(parseddata) : []);
+    let parseddata = new Set(JSON.parse(localStorage.getItem("watched")));
+    // storedData가 null일 경우 빈 배열로 초기화
+    // let parseddata = new Set(storedData.map((item) => JSON.stringify(item)));
+    parseddata.add(data[id]);
+
+    console.log(data[id]);
+    console.log([...parseddata]);
+
+    localStorage.setItem("watched", JSON.stringify([...parseddata]));
+
+    console.log("Stored watched data:", localStorage.getItem("watched"));
+  }, [data, id]);
+
   let [sales, salesChange] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -101,7 +117,6 @@ function Detail(props) {
               className="btn btn-danger"
               onClick={() => {
                 dispatch(addProduct(data[id]));
-                //console.log(data[id]);
                 console.log(state.cart);
               }}
             >

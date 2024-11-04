@@ -10,7 +10,7 @@ import {
   Col,
 } from "react-bootstrap";
 import bg from "./bg.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // public 폴더 안에 이미지 사용할 땐 그냥 "/이미지경로"
 // public 폴더는 일일이 import 할 필요 없어 이미지 같은 리소스들 넣기 좋다.
 import data from "./data.js"; // 다른 파일에서 변수 가져와서 쓰기 -> import/export
@@ -20,6 +20,10 @@ import axios from "axios";
 import Cart from "./Cart.jsx";
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
+
   // json 형태의 데이터의 경우 코드 길이가 길이 data.js 파일에 따로 분리해준 뒤
   // import, export를 통해 데이터를 가져온다.
   let [shoes, shoesChange] = useState(data);
