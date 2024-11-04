@@ -149,7 +149,11 @@ function App() {
               <Row>
                 {shoes.map(function (a) {
                   // return() 안넣었는데 에러를 뱉지 않았다..
-                  return <Item a={a}></Item>;
+                  return (
+                    <Link to={`/detail/${a.id}`}>
+                      <Item a={a}></Item>
+                    </Link>
+                  );
                 })}
               </Row>
               <Row>
@@ -157,7 +161,11 @@ function App() {
                 concat()-문자열이나 배열을 합쳐주는 함수 */}
                 {추가물품 == true
                   ? 추가버튼.map(function (a) {
-                      return <Item a={a} />;
+                      return (
+                        <>
+                          <Item a={a} />
+                        </>
+                      );
                     })
                   : null}
               </Row>
