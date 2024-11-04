@@ -43,6 +43,7 @@ function hasNonNumericCharacters(input) {
   // 정규 표현식: 숫자가 아닌 문자가 하나라도 있는지 확인
   const nonNumericPattern = /[^0-9]/;
   // 정규표현식 객체의 test() : 주어진 문자열이 정규표현식에 매치되는지 검사
+  // 정규표현식객체는 슬래시(/)로 감싸거나, RegExp() 생성자를 이용해 만듦.
   return nonNumericPattern.test(input);
 }
 
@@ -92,8 +93,16 @@ function Detail(props) {
   // store.js에게 요청을 보내는 함수
   let dispatch = useDispatch();
 
+  let [like, setLike] = useState(0);
+  function addLike() {
+    // setLike(like+1)과 결과동일, 인자로 콜백함수를 넣어줄 수 있다. 콜백함수의 인자는 기존 state
+    // 메소드 오버로딩이랑 비슷해보임
+    setLike((a) => a + 1);
+  }
+
   return (
     <>
+      {like} <span onClick={() => addLike()}>하트</span>
       <div className="container">
         {sales ? (
           <div className="alert alert -warning">2초이내 구매시 할인</div>
