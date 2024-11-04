@@ -18,8 +18,10 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail.jsx";
 import axios from "axios";
 import Cart from "./Cart.jsx";
+import { useName } from "./hooks/useName";
 
 function App() {
+  let [name, setName] = useName();
   // useEffect 훅은 컴포넌트가 처음 렌더링될 때 한 번 실행된다. 그리고 두 번째 인자로 빈 배열 []을 주었기 때문에, 이 useEffect는 컴포넌트가 처음 마운트될 때만 실행된다. 페이지를 새로 고치면 컴포넌트가 다시 마운트되기 때문에, 이 useEffect가 다시 실행되고 localStorage의 "watched" 항목이 빈 배열로 초기화된다.
   useEffect(() => {
     let watched = localStorage.getItem("watched");
@@ -93,6 +95,7 @@ function App() {
         style={{ backgroundImage: "url(" + bg + ")" }}
       ></div>
       <div className="brandnew">brand new</div>
+      <div>{name}</div>
       <button
         className="sort"
         onClick={() => {
